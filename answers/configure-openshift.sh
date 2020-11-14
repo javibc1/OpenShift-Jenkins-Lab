@@ -19,7 +19,8 @@ oc policy add-role-to-user registry-editor system:serviceaccount:${GITHUB_USERNA
 # oc create secret generic git-auth --from-literal=username=${GITHUB_USERNAME} --from-literal=password=${GITHUB_PASSWORD} --type=kubernetes.io/basic-auth -n ${GITHUB_USERNAME}-dev
 
 ## 5) Create birthday-paradox-pipeline BuildConfig
-oc process -f ../pipeline.yaml -p APPLICATION_NAME=birthday-paradox -p REPOSITORY_URI=https://github.com/${GITHUB_USERNAME}/OpenShift-Jenkins-Lab -p SOURCE_REF=master -p SOURCE_SECRET=git-auth | oc apply -f - -n ${GITHUB_USERNAME}-dev
+# oc process -f ../pipeline.yaml -p APPLICATION_NAME=birthday-paradox -p REPOSITORY_URI=https://github.com/${GITHUB_USERNAME}/OpenShift-Jenkins-Lab -p SOURCE_REF=master -p SOURCE_SECRET=git-auth | oc apply -f - -n ${GITHUB_USERNAME}-dev
+oc process -f ../pipeline.yaml -p APPLICATION_NAME=birthday-paradox -p REPOSITORY_URI=https://github.com/${GITHUB_USERNAME}/OpenShift-Jenkins-Lab -p SOURCE_REF=master | oc apply -f - -n ${GITHUB_USERNAME}-dev
 
 ## 6) Create jenkins-agent-skopeo ImageStream
 oc create -f ../openshift/agents/jenkins-agent-skopeo.yaml -n ${GITHUB_USERNAME}-dev
