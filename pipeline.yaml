@@ -35,6 +35,6 @@ parameters:
 - name: APPLICATION_CONTEXT_DIR
   value: "."
 - name: PIPELINE_SCRIPT
-  value: Jenkinsfile
+  value: answers/Jenkinsfile
 # - name: SOURCE_SECRET
 #   required: true
