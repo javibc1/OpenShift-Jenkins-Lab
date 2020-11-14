@@ -18,8 +18,8 @@ objects:
         uri: ${REPOSITORY_URI}
         ref: ${SOURCE_REF}
       contextDir: ${APPLICATION_CONTEXT_DIR}
-      sourceSecret:
-        name: ${SOURCE_SECRET}
+      # sourceSecret:
+      #   name: ${SOURCE_SECRET}
     strategy:
       type: JenkinsPipeline
       jenkinsPipelineStrategy:
@@ -36,5 +36,5 @@ parameters:
   value: "."
 - name: PIPELINE_SCRIPT
   value: Jenkinsfile
-- name: SOURCE_SECRET
-  required: true
+# - name: SOURCE_SECRET
+#   required: true

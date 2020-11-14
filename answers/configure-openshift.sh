@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export GITHUB_USERNAME=javibc1
 ## 1) Create OpenShift Environments
 oc new-project ${GITHUB_USERNAME}-dev
 oc new-project ${GITHUB_USERNAME}-test
@@ -16,7 +16,7 @@ oc policy add-role-to-user registry-editor system:serviceaccount:${GITHUB_USERNA
 oc policy add-role-to-user registry-editor system:serviceaccount:${GITHUB_USERNAME}-dev:jenkins -n ${GITHUB_USERNAME}-prod
 
 ## 4) Create git-auth secret
-oc create secret generic git-auth --from-literal=username=${GITHUB_USERNAME} --from-literal=password=${GITHUB_PASSWORD} --type=kubernetes.io/basic-auth -n ${GITHUB_USERNAME}-dev
+# oc create secret generic git-auth --from-literal=username=${GITHUB_USERNAME} --from-literal=password=${GITHUB_PASSWORD} --type=kubernetes.io/basic-auth -n ${GITHUB_USERNAME}-dev
 
 ## 5) Create birthday-paradox-pipeline BuildConfig
 oc process -f ../pipeline.yaml -p APPLICATION_NAME=birthday-paradox -p REPOSITORY_URI=https://github.com/${GITHUB_USERNAME}/OpenShift-Jenkins-Lab -p SOURCE_REF=master -p SOURCE_SECRET=git-auth | oc apply -f - -n ${GITHUB_USERNAME}-dev
